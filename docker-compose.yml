@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  smart_shop:
+    build:
+      context: ./
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: 'smart_shop'
+    container_name: 'smart_shop'
+    network_mode: 'host'
+    ports:
+      - 9870:9870
+    restart: always
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 192.168.0.103:24224
+        fluentd-async-connect: 'true'
+        fluentd-retry-wait: '1s'
+        fluentd-max-retries: '30'
+        tag: 'smart_shop.efk'

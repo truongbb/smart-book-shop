@@ -1,0 +1,41 @@
+server:
+  port: 9870
+
+spring:
+  application:
+    name: 'smart_shop'
+    admin:
+      enabled: true
+
+  banner:
+    charset: 'UTF-8'
+
+#  mail:
+#    default-encoding: 'UTF-8'
+#    host: 'smtp.example.com'
+#    port: 0000
+#    username: ''
+#    password: ''
+#
+#  security:
+
+  data:
+    rest:
+      base-path: 'smart_shop'
+
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.0.100:1521:xe
+    username: truongbb
+    password: 123456
+
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+#  devtools:
+#    add-properties: true
+#    livereload:
+#      enabled: true
+#      port: 9870
