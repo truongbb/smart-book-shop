@@ -1,6 +1,9 @@
 server:
   port: 9870
 
+jwt:
+  secret: smartshop
+
 spring:
   application:
     name: 'smart_shop'
@@ -28,14 +31,14 @@ spring:
     url: jdbc:oracle:thin:@192.168.0.100:1521:xe
     username: truongbb
     password: 123456
+    dbcp2:
+      test-while-idle: true
+      validation-query: SELECT 1 FROM DUAL
+
+  jpa:
+    show-sql: true
 
   http:
     encoding:
       charset: UTF-8
       enabled: true
-
-#  devtools:
-#    add-properties: true
-#    livereload:
-#      enabled: true
-#      port: 9870

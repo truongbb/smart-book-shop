@@ -5,11 +5,19 @@ insert into person values (person_seq.nextval, 'sale', null, 'sale', to_date('19
 insert into person values (person_seq.nextval, 'customer', null, 'customer', to_date('19000101', 'YYYYMMDD'), null, 'customer@customer.com', '0000000000', 1);
 
 
---account
-insert into account values (account_seq.nextval, 'manager', 'manager', 1, null, 5, 1);
-insert into account values (account_seq.nextval, 'marketing', 'marketing', 1, null, 4, 2);
-insert into account values (account_seq.nextval, 'sale', 'sale', 1, null, 3, 3);
-insert into account values (account_seq.nextval, 'customer', 'customer', 1, null, 2, 2);
+--user
+insert into users values (user_seq.nextval, 'manager', 'manager', 1, null, 1);
+insert into users values (user_seq.nextval, 'marketing', 'marketing', 1, null, 2);
+insert into users values (user_seq.nextval, 'sale', 'sale', 1, null, 3);
+insert into users values (user_seq.nextval, 'customer', 'customer', 1, null, 4);
+
+
+--user_role
+insert into user_role values (1, 5);
+insert into user_role values (2, 4);
+insert into user_role values (3, 3);
+insert into user_role values (4, 2);
+
 
 
 --customer
@@ -38,20 +46,4 @@ insert into department values (department_seq.nextval, 'Marketing', '0123456789'
 insert into department values (department_seq.nextval, 'Manager', '0123456789');
 insert into department values (department_seq.nextval, 'Warehouse', '0123456789');
 insert into department values (department_seq.nextval, 'BOD', '0123456789');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

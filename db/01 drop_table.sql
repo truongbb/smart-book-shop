@@ -13,10 +13,12 @@ drop table salary;
 drop table literacy;
 drop table department;
 
+drop table user_role;
+drop table roleEntity;
+drop table users;
 drop table person;
 drop table gender;
-drop table account;
-drop table role;
+
 
 drop table book;
 drop table publisher;

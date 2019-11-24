@@ -21,8 +21,7 @@ import java.nio.file.Paths;
 @Slf4j
 public class SQLBuilder {
 
-    public static final String SQL_MODULE_STUDENT = "student";
-    public static final String SQL_MODULE_CLASSES = "classes";
+    public static final String SQL_MODULE_USER = "user";
 
     public static String getSqlFromFile(String module, String sqlFileName) {
         File folder;

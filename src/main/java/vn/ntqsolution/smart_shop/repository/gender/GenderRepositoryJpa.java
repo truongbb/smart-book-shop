@@ -1,0 +1,10 @@
+package vn.ntqsolution.smart_shop.repository.gender;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import vn.ntqsolution.smart_shop.entity.GenderEntity;
+
+public interface GenderRepositoryJpa extends JpaRepository<GenderEntity, Long> {
+
+  GenderEntity findOneByGenderValue(String genderValue);
+
+}

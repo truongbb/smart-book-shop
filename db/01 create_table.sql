@@ -37,21 +37,27 @@ create table customer(
 );
 
 -- account
-create table role(
+create table roleEntity(
     id int primary key,
     role_name nvarchar2(50) not null
 );
 
-create table account(
+create table users(
     id int primary key,
     username nvarchar2(30) not null,
     password nvarchar2(50) not null,
     is_active number not null,
     avatar_url nvarchar2(500),
-    role_id int not null constraint role_fk references role(id) on delete cascade,
+--    role_id int not null constraint role_fk references roleEntity(id) on delete cascade,
     person_id int not null constraint account_person_fk references person(id) on delete cascade
 );
-comment on column account.is_active is '1:ACTIVE, 0:DEACTIVE';
+comment on column users.is_active is '1:ACTIVE, 0:DEACTIVE';
+
+create table user_role (
+    user_id int not null constraint user_fk references users(id) on delete cascade,
+    role_id int not null constraint role_fk references roleEntity(id) on delete cascade,
+    primary key (user_id, role_id)
+);
 
 -- employee
 create table department(
