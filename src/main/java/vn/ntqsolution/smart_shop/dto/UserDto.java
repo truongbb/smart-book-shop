@@ -32,6 +32,8 @@ public class UserDto {
   String gender;
   String roleName;
 
+  String activeToken;
+
   List<String> roles;
 
 

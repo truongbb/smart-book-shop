@@ -13,14 +13,24 @@ spring:
   banner:
     charset: 'UTF-8'
 
-#  mail:
-#    default-encoding: 'UTF-8'
-#    host: 'smtp.example.com'
-#    port: 0000
-#    username: ''
-#    password: ''
-#
-#  security:
+# https://stackoverflow.com/questions/35347269/javax-mail-authenticationfailedexception-535-5-7-8-username-and-password-not-ac
+  mail:
+    default-encoding: 'UTF-8'
+    host: 'smtp.gmail.com'
+    port: 587
+    username: 'luffylsbrucelee96@gmail.com'
+    password: 'hoanghuynh0801'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls:
+            enable: true
+
+  #  security:
 
   data:
     rest:

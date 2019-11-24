@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .authorizeRequests()
       .antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
       .antMatchers(HttpMethod.OPTIONS).permitAll()
-      .antMatchers("/**/register", "/**/authenticate").permitAll()
+      .antMatchers("/**/register", "/**/authenticate", "/**/active-account/**").permitAll()
 //      .antMatchers("/").hasRole(Constants.Role.CUSTOMER)
 //      .antMatchers("/smart_shop/admin").hasRole(Constants.Role.MANAGER)
       .anyRequest().authenticated();

@@ -48,6 +48,7 @@ create table users(
     password nvarchar2(50) not null,
     is_active number not null,
     avatar_url nvarchar2(500),
+    active_token nvarchar2(80),
 --    role_id int not null constraint role_fk references roleEntity(id) on delete cascade,
     person_id int not null constraint account_person_fk references person(id) on delete cascade
 );

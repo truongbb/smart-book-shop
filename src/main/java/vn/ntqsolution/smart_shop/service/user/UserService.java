@@ -18,4 +18,6 @@ public interface UserService {
 
   UsersEntity createUser(UserVm userVm);
 
+  boolean activeUser(String username);
+
 }

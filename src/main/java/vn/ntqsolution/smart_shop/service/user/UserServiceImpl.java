@@ -18,6 +18,7 @@ import vn.ntqsolution.smart_shop.repository.gender.GenderRepositoryJpa;
 import vn.ntqsolution.smart_shop.repository.role.RoleRepositoryJpa;
 import vn.ntqsolution.smart_shop.repository.user.UserRepository;
 import vn.ntqsolution.smart_shop.repository.user.UserRepositoryJpa;
+import vn.ntqsolution.smart_shop.utils.DataUtil;
 import vn.ntqsolution.smart_shop.web.vm.UserVm;
 
 import java.util.*;
@@ -96,6 +97,7 @@ public class UserServiceImpl implements UserService {
 
     usersEntity.setAvatarUrl(userVm.getAvatarUrl());
     usersEntity.setIsActive(false);
+    usersEntity.setActiveToken(DataUtil.generateRandomString());
 
     Set<RoleEntity> roles = new HashSet<>();
     userVm.getRoles().forEach(role -> {
@@ -105,5 +107,14 @@ public class UserServiceImpl implements UserService {
 
     UsersEntity user = userRepositoryJpa.save(usersEntity);
     return user;
+  }
+
+  @Override
+  @Transactional
+  public boolean activeUser(String username) {
+    UsersEntity entity = userRepositoryJpa.findByUsername(username);
+    entity.setIsActive(true);
+    UsersEntity usersEntity = userRepositoryJpa.save(entity);
+    return usersEntity != null;
   }
 }

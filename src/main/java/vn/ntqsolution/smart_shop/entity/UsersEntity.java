@@ -35,6 +35,9 @@ public class UsersEntity implements Serializable {
   @Column(name = "AVATAR_URL")
   String avatarUrl;
 
+  @Column(name = "ACTIVE_TOKEN")
+  String activeToken;
+
   @OneToOne
   @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID")
   PersonEntity person;

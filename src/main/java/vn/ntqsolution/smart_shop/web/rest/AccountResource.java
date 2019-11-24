@@ -6,11 +6,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.ntqsolution.smart_shop.entity.UsersEntity;
+import vn.ntqsolution.smart_shop.service.mail.MailService;
 import vn.ntqsolution.smart_shop.service.user.UserService;
 import vn.ntqsolution.smart_shop.web.vm.UserVm;
 
@@ -21,6 +19,9 @@ public class AccountResource {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private MailService mailService;
 
   @PostMapping(value = "/register")
   public ResponseEntity<?> register(@RequestBody UserVm userVm) {
@@ -36,12 +37,26 @@ public class AccountResource {
           .map(user -> new ResponseEntity("Phone number already use", textPlainHeaders, HttpStatus.BAD_REQUEST))
           .orElseGet(() -> {
             UsersEntity user = userService.createUser(userVm);
-
             log.debug("Created user: " + user);
-            // send mail
+            mailService.sendActivationEmail(user.getPerson().getEmail(), user.getUsername(), user.getActiveToken());
             return new ResponseEntity<>(HttpStatus.CREATED);
           })
         ));
+  }
+
+  @GetMapping(value = "/active-account/{username}/{activeToken}")
+  public ResponseEntity<?> activeAccount(@PathVariable String username, @PathVariable String activeToken) {
+
+    HttpHeaders textPlainHeaders = new HttpHeaders();
+    textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
+
+    return userService.findByUsernameOrEmailOrPhone("username", username)
+      .map(user -> {
+        if (!user.getActiveToken().equals(activeToken)) {
+          return new ResponseEntity<>("Activation failed by incorrect activation token", textPlainHeaders, HttpStatus.BAD_REQUEST);
+        }
+        return userService.activeUser(user.getUsername()) ? new ResponseEntity<>(user, HttpStatus.OK) : new ResponseEntity<>("Activation failed", textPlainHeaders, HttpStatus.BAD_REQUEST);
+      }).orElseGet(() -> new ResponseEntity<>("User" + username + " not found", textPlainHeaders, HttpStatus.BAD_REQUEST));
   }
 
 }
