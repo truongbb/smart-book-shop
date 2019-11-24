@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return super.authenticationManagerBean();
   }
 
+//  https://www.ninjadevcorner.com/2018/09/stateless-authentication-jwt-secure-spring-boot-rest-api.html
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
