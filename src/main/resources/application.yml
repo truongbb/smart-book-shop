@@ -5,6 +5,14 @@ jwt:
   secret: smartshop
 
 spring:
+  #  boot:
+  #    admin: #https://codecentric.github.io/spring-boot-admin/2.1.6/
+  #      client:
+  #        enabled: true
+  #        url: localhost:9871
+  #        username: admin
+  #        password: admin
+
   application:
     name: 'smart_shop'
     admin:
@@ -13,7 +21,7 @@ spring:
   banner:
     charset: 'UTF-8'
 
-# https://stackoverflow.com/questions/35347269/javax-mail-authenticationfailedexception-535-5-7-8-username-and-password-not-ac
+  # https://stackoverflow.com/questions/35347269/javax-mail-authenticationfailedexception-535-5-7-8-username-and-password-not-ac
   mail:
     default-encoding: 'UTF-8'
     host: 'smtp.gmail.com'
