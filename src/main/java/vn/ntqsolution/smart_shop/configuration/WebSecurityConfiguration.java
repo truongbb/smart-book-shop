@@ -63,7 +63,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests()
       .antMatchers("/swagger-resources/**", "/v2/api-docs").permitAll()
-      .antMatchers(HttpMethod.GET, "/", "**/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+      .antMatchers(HttpMethod.GET, "**/home", "**/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
       .antMatchers(HttpMethod.OPTIONS).permitAll()
       .antMatchers("/**/register", "/**/authenticate", "/**/active-account/**").permitAll()
 //      .antMatchers("/").hasRole(Constants.Role.CUSTOMER)

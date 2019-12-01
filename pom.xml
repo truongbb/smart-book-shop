@@ -9,11 +9,11 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>vn.ntq-solution</groupId>
-  <artifactId>smart_shop</artifactId>
+  <artifactId>smart_book_shop_service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>smart_shop</name>
-  <description>Smart shop project for IITSOL intern mockup</description>
+  <name>smart_book_shop_service</name>
+  <description>Smart book shop service project for IITSOL intern mockup</description>
 
   <properties>
     <java.version>1.8</java.version>
