@@ -36,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     httpServletResponse.addHeader("Access-Control-Allow-Headers",
       "Access-Control-Allow-Origin, Origin, Accept, X-Requested-With, Authorization, refreshauthorization, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Credentials");
     if (httpServletResponse.getHeader("Access-Control-Allow-Origin") == null)
-      httpServletResponse.addHeader("Access-Control-Allow-Origin", "http://localhost:9870");
+      httpServletResponse.addHeader("Access-Control-Allow-Origin", "http://localhost:8000");
     if (httpServletResponse.getHeader("Access-Control-Allow-Credentials") == null)
       httpServletResponse.addHeader("Access-Control-Allow-Credentials", "true");
     if (httpServletResponse.getHeader("Access-Control-Allow-Methods") == null)
