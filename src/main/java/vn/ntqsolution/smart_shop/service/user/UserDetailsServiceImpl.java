@@ -14,6 +14,7 @@ import vn.ntqsolution.smart_shop.dto.UserDto;
 import vn.ntqsolution.smart_shop.entity.RoleEntity;
 import vn.ntqsolution.smart_shop.entity.UsersEntity;
 import vn.ntqsolution.smart_shop.repository.user.UserRepositoryJpa;
+import vn.ntqsolution.smart_shop.utils.Constants;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   }
 
   public UserDto loadUserDtoByUsername(String username) {
-    Optional<UserDto> userDtoOptional = userService.findByUsernameOrEmailOrPhone("username", username);
+    Optional<UserDto> userDtoOptional = userService.findByUsernameOrEmailOrPhone(Constants.UserFindField.USERNAME, username);
 
     return userDtoOptional.map(userDto -> {
       String encodedPassword = bcryptEncoder.encode(userDto.getPassword());

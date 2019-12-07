@@ -2,6 +2,7 @@ package vn.ntqsolution.smart_shop.utils;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -33,8 +34,20 @@ public class DataUtil {
   /**
    * @return UUID random string (always is 36 characters)
    */
-  public static String generateRandomString() {
+  public static String generateUUIDRandomString() {
     return UUID.randomUUID().toString();
+  }
+
+  public static String generateRandomString(int lenght) {
+    String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    StringBuilder salt = new StringBuilder();
+    Random rnd = new Random();
+    while (salt.length() < lenght) {
+      int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+      salt.append(SALTCHARS.charAt(index));
+    }
+    String saltStr = salt.toString();
+    return saltStr;
   }
 
 }

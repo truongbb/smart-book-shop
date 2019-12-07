@@ -5,7 +5,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import vn.ntqsolution.smart_shop.dto.UserDto;
+import vn.ntqsolution.smart_shop.entity.UsersEntity;
 import vn.ntqsolution.smart_shop.repository.BaseRepository;
+import vn.ntqsolution.smart_shop.utils.Constants;
 import vn.ntqsolution.smart_shop.utils.DataUtil;
 import vn.ntqsolution.smart_shop.utils.SQLBuilder;
 
@@ -25,13 +27,13 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
     try {
       StringBuilder sql = new StringBuilder(SQLBuilder.getSqlFromFile(SQLBuilder.SQL_MODULE_USER, "find_by_username_mail_phone"));
       Map<String, Object> parameters = new HashMap<>();
-      if ("email".equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
+      if (Constants.UserFindField.EMAIL.equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
         sql.append(" and email = :p_email");
         parameters.put("p_email", value);
-      } else if ("username".equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
+      } else if (Constants.UserFindField.USERNAME.equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
         sql.append(" and username = :p_username");
         parameters.put("p_username", value);
-      } else if ("phone".equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
+      } else if (Constants.UserFindField.PHONE.equalsIgnoreCase(searchField) && DataUtil.isNotNullAndEmptyString(value)) {
         sql.append(" and phone_number = :p_phone");
         parameters.put("p_phone", value);
       }
@@ -40,5 +42,11 @@ public class UserRepositoryImpl extends BaseRepository implements UserRepository
       log.error(e.getMessage(), e);
     }
     return userDtos;
+  }
+
+  @Override
+  public boolean updateUserEntity(UsersEntity usersEntity) {
+    UsersEntity merge = getEntityManager().merge(usersEntity);
+    return merge != null;
   }
 }

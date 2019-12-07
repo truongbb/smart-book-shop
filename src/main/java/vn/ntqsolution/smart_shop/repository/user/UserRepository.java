@@ -1,6 +1,7 @@
 package vn.ntqsolution.smart_shop.repository.user;
 
 import vn.ntqsolution.smart_shop.dto.UserDto;
+import vn.ntqsolution.smart_shop.entity.UsersEntity;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface UserRepository {
    * @return List<UserDto>
    */
   List<UserDto> findByUsernameOrEmailOrPhone(String searchField, String value);
+
+  boolean updateUserEntity(UsersEntity usersEntity);
 
 }

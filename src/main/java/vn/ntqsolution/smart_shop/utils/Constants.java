@@ -14,4 +14,10 @@ public interface Constants {
     String MANAGER = "MANAGER";
   }
 
+  interface UserFindField {
+    String USERNAME = "USERNAME";
+    String EMAIL = "EMAIL";
+    String PHONE = "PHONE";
+  }
+
 }

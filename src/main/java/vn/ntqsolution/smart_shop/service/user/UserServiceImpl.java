@@ -18,6 +18,8 @@ import vn.ntqsolution.smart_shop.repository.gender.GenderRepositoryJpa;
 import vn.ntqsolution.smart_shop.repository.role.RoleRepositoryJpa;
 import vn.ntqsolution.smart_shop.repository.user.UserRepository;
 import vn.ntqsolution.smart_shop.repository.user.UserRepositoryJpa;
+import vn.ntqsolution.smart_shop.service.mail.MailService;
+import vn.ntqsolution.smart_shop.utils.Constants;
 import vn.ntqsolution.smart_shop.utils.DataUtil;
 import vn.ntqsolution.smart_shop.web.vm.UserVm;
 
@@ -45,6 +47,9 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   PersonRepositoryJpa personRepositoryJpa;
+
+  @Autowired
+  MailService mailService;
 
   @Override
   public Optional<UserDto> findByUsernameOrEmailOrPhone(String searchField, String value) {
@@ -97,7 +102,7 @@ public class UserServiceImpl implements UserService {
 
     usersEntity.setAvatarUrl(userVm.getAvatarUrl());
     usersEntity.setIsActive(false);
-    usersEntity.setActiveToken(DataUtil.generateRandomString());
+    usersEntity.setActiveToken(DataUtil.generateUUIDRandomString());
 
     Set<RoleEntity> roles = new HashSet<>();
     userVm.getRoles().forEach(role -> {
@@ -116,5 +121,31 @@ public class UserServiceImpl implements UserService {
     entity.setIsActive(true);
     UsersEntity usersEntity = userRepositoryJpa.save(entity);
     return usersEntity != null;
+  }
+
+  @Override
+  @Transactional
+  public boolean resetPassword(String email) throws UsernameNotFoundException {
+
+    if (!DataUtil.isNotNullAndEmptyString(email)) {
+      throw new UsernameNotFoundException("Email '" + email + "' not found");
+    }
+
+    Optional<UserDto> userOptional = findByUsernameOrEmailOrPhone(Constants.UserFindField.EMAIL, email);
+
+    userOptional.map(userDto -> {
+      UsersEntity entity = userRepositoryJpa.findByUsername(userDto.getUsername());
+      String newPassword = DataUtil.generateRandomString(16);
+
+      String encryptedPassword = passwordEncoder.encode(newPassword);
+      entity.setPassword(encryptedPassword);
+      boolean result = userRepository.updateUserEntity(entity);
+      if (result) {
+        mailService.sendResetPassword(userDto.getEmail(), newPassword);
+        return true;
+      }
+      return false;
+    }).orElseThrow(() -> new UsernameNotFoundException("Email '" + email + "' not found"));
+    return false;
   }
 }
