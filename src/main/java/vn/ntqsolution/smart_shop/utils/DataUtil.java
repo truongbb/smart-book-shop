@@ -17,7 +17,7 @@ import java.util.UUID;
 public class DataUtil {
 
   public static boolean isNotNullAndEmptyString(String srcString) {
-    return srcString != null && !"".equals(srcString.trim());
+    return !(srcString == null || "".equals(srcString.trim()));
   }
 
 
@@ -39,12 +39,12 @@ public class DataUtil {
   }
 
   public static String generateRandomString(int lenght) {
-    String SALTCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    String saltCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     StringBuilder salt = new StringBuilder();
     Random rnd = new Random();
     while (salt.length() < lenght) {
-      int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-      salt.append(SALTCHARS.charAt(index));
+      int index = (int) (rnd.nextFloat() * saltCharacters.length());
+      salt.append(saltCharacters.charAt(index));
     }
     String saltStr = salt.toString();
     return saltStr;

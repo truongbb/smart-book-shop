@@ -6,8 +6,7 @@ import lombok.experimental.FieldDefaults;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

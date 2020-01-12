@@ -6,12 +6,12 @@ import lombok.experimental.FieldDefaults;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserVm {
+
   String username;
   String password;
 

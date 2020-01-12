@@ -1,5 +1,7 @@
 package vn.ntqsolution.smart_shop.security;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,14 +22,15 @@ import java.io.IOException;
 
 @Component
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class JwtRequestFilter extends OncePerRequestFilter {
 
   @Qualifier("userDetailsServiceImpl")
   @Autowired
-  private UserDetailsService userDetailsService;
+  UserDetailsService userDetailsService;
 
   @Autowired
-  private JwtTokenUtil jwtTokenUtil;
+  JwtTokenUtil jwtTokenUtil;
 
   @Override
   protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
@@ -49,8 +52,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     if (requestHeader != null && requestHeader.startsWith(Constants.Security.HEADER_PREFIX)) {
       jwtToken = requestHeader.substring(7);
       username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-    } else {
-      log.error("JWT token ERROR: NULL or doesn't start with 'Bearer' string");
     }
 
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

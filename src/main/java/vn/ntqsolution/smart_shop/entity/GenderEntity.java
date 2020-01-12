@@ -9,8 +9,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "GENDER")
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

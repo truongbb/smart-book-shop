@@ -1,5 +1,7 @@
 package vn.ntqsolution.smart_shop.web.rest;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,13 +17,14 @@ import vn.ntqsolution.smart_shop.web.vm.UserVm;
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/account")
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AccountResource {
 
   @Autowired
-  private UserService userService;
+  UserService userService;
 
   @Autowired
-  private MailService mailService;
+  MailService mailService;
 
   @PostMapping(value = "/register")
   public ResponseEntity<?> register(@RequestBody UserVm userVm) {

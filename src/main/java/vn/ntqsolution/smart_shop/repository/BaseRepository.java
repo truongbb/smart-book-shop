@@ -1,5 +1,8 @@
 package vn.ntqsolution.smart_shop.repository;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,31 +21,20 @@ import javax.persistence.PersistenceContext;
  */
 
 @Repository
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class BaseRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+  @PersistenceContext
+  EntityManager entityManager;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+  @Autowired
+  JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+  @Autowired
+  NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    protected Session getSession() {
-        Session session = entityManager.unwrap(Session.class);
-        return session;
-    }
-
-    protected JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    protected NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
-        return namedParameterJdbcTemplate;
-    }
-
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
+  protected Session getSession() {
+    return entityManager.unwrap(Session.class);
+  }
 }

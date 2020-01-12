@@ -4,6 +4,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -15,12 +17,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class JwtTokenUtil {
 
   public static final long JWT_TOKEN_VALIDITY_TIME = 5 * 60 * 60;
 
   @Value("${jwt.secret}")
-  private String secret;
+  String secret;
 
   public String generateToken(UserDto userDto) {
     Map<String, Object> claims = new HashMap<>();

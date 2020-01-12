@@ -5,13 +5,10 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "ROLE")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

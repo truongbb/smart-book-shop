@@ -1,5 +1,7 @@
 package vn.ntqsolution.smart_shop.configuration;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -23,18 +25,19 @@ import vn.ntqsolution.smart_shop.utils.Constants;
 
 @Configuration
 @EnableWebSecurity
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+  JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
   @Qualifier("userDetailsServiceImpl")
   @Autowired
-  private UserDetailsService userDetailsService;
+  UserDetailsService userDetailsService;
 
   @Autowired
-  private JwtRequestFilter jwtRequestFilter;
+  JwtRequestFilter jwtRequestFilter;
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

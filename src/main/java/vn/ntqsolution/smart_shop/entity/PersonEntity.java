@@ -10,8 +10,6 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "PERSON")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)

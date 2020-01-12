@@ -1,5 +1,7 @@
 package vn.ntqsolution.smart_shop.web.rest;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,19 +29,20 @@ import java.util.Map;
 @RestController
 @RequestMapping("${spring.data.rest.base-path}/authenticate")
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AuthenticateResource {
 
   @Autowired
-  private AuthenticationManager authenticationManager;
+  AuthenticationManager authenticationManager;
 
   @Autowired
-  private UserDetailsServiceImpl userDetailsServiceImpl;
+  UserDetailsServiceImpl userDetailsServiceImpl;
 
   @Autowired
-  private JwtTokenUtil jwtTokenUtil;
+  JwtTokenUtil jwtTokenUtil;
 
   @Autowired
-  private UserService userService;
+  UserService userService;
 
   @PostMapping(value = "/authenticate")
   public ResponseEntity<?> createAuthenticationToken(@Valid @RequestBody AuthenticateVm authenticateVm) throws Exception {
